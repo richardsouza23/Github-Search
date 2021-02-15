@@ -1,0 +1,16 @@
+.extra-info {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.extra-info .icon-info {
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+    vertical-align: top;
+}
+
+.extra-info span {
+    font-size: 13px;
+    vertical-align: text-top;
+}
