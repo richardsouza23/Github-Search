@@ -10,21 +10,21 @@ import externalLinkIcon from "../../assets/icons/external-link-alt-solid.svg"
 export default class RepoCard extends Component {
 
     render() {
+        let { repoName, repoDescription, stargazersCount, forksCount, language } = this.props;
+
         return (
             <div className={"repo-card"} >
 
-                <h4 className={"repo-name"} >awesome-made-by-brazilians mm mmm mmm mmm mm mm mm mm mm mm</h4>
+                <h4 className={"repo-name"} >{repoName}</h4>
 
                 <div className={"repo-description-wrapper"} >
-                    <p>🇧🇷 A collection of amazing open source projects built by brazilian developers 
-                        mmmmmmmm mmm mmmmmm mm mmmm mm mmmmmmm m mmm mmmmmmm mm mmm mmm mmm mm mm mm mm mm mm mmm mmmm </p>
+                    <p>{repoDescription}</p>
                 </div>
 
                 <div className={"extra-repo-info-wrapper"}>
-
-                    <ExtraRepoInfo icon={starIcon} text={"40"} />
-                    <ExtraRepoInfo icon={branchIcon} text={"50"} />
-                    <ExtraRepoInfo icon={fileCodeIcon} text={"JavaScript"} />
+                    <ExtraRepoInfo icon={starIcon} text={stargazersCount} />
+                    <ExtraRepoInfo icon={branchIcon} text={forksCount} />
+                    <ExtraRepoInfo icon={fileCodeIcon} text={language} />
                     <ExtraRepoInfo icon={externalLinkIcon} text={""} />
                 </div>
 

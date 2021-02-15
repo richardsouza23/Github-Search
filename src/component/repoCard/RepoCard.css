@@ -39,3 +39,13 @@
 .repo-card .extra-repo-info-wrapper > div{
     float: left;
 }
+
+.repo-card .extra-repo-info-wrapper .extra-info {
+    margin-right: 10px;
+}
+
+@media(min-width: 300px) {
+    .repo-card .extra-repo-info-wrapper .extra-info {
+        margin-right: 15px;
+    }
+}
