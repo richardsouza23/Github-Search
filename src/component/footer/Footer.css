@@ -1,0 +1,25 @@
+.footer {
+    height: 100%;
+    background-color: #201F1F;
+}
+
+.footer .footer-content {
+    height: inherit;
+}
+
+.footer .footer-logos {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: inherit;
+    display: inline-block;
+    min-width: 5px;
+}
+.footer img {
+    position: relative;
+    height: 65%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 10px;
+    cursor: pointer;
+}

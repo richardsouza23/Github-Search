@@ -1,0 +1,14 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+
+#grid-repos-wrapper {
+    flex-grow: 1;
+}
+
+#footer-wrapper {
+    margin-top: 20px;
+    height: 65px;
+}

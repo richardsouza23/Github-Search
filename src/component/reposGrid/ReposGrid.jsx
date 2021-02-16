@@ -18,7 +18,7 @@ export default class ReposGrid extends Component {
         let repos = [];
         for(let i=0 ; i < 13; i++) {
             repos.push(
-                <div className={"repo-card-wrapper"} >
+                <div className={"repo-card-wrapper"} key={i} >
                     <RepoCard {...repoCardProps} />
                 </div>
             );

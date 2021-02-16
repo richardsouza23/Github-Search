@@ -1,5 +1,7 @@
 import SearchPage from "../pages/search/SearchPage";
 import ResultPage from "../pages/result/ResultPage";
+import "./App.css"
+
 
 function App() {
   return (

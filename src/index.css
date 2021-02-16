@@ -2,6 +2,10 @@ body {
     background-color: #232324;
 }
 
+#root {
+    height: 100vh;
+}
+
 .page-content-container{
     width: 80%;
     margin: auto;
