@@ -1,0 +1,21 @@
+.header-result {
+    height: inherit;
+}
+
+.header-container {
+    height: inherit;
+    box-sizing: border-box;
+    padding: 15px 0;
+}
+
+.header-result .logo {
+    height: 100%;
+}
+
+.header-result .back-button {
+    height: 50%;
+    position: relative;
+    float: right;
+    top: 50%;
+    transform: translateY(-50%);
+}

@@ -4,6 +4,10 @@
     height: inherit;
 }
 
+#header-result-wrapper{
+    height: 80px;
+}
+
 #grid-repos-wrapper {
     flex-grow: 1;
 }
