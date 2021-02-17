@@ -36,6 +36,12 @@
     line-height: 16px;
 }
 
+.repo-card .extra-repo-info-wrapper{
+    height: 12px;
+    line-height: 12px;
+    font-size: 12px;
+}
+
 .repo-card .extra-repo-info-wrapper > div{
     float: left;
 }

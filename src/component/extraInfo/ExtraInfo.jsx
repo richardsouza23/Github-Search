@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./ExtraRepoInfo.css"
+import "./ExtraInfo.css"
 
-export default class ExtraRepoInfo extends Component {
+export default class ExtraInfo extends Component {
     render() {
         return (
             <div className={"extra-info"}>

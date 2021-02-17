@@ -10,6 +10,7 @@
 
 .header-result .logo {
     height: 100%;
+    cursor: pointer;
 }
 
 .header-result .back-button {
@@ -18,4 +19,5 @@
     float: right;
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
 }
