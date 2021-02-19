@@ -8,8 +8,13 @@
     height: 80px;
 }
 
+#user-info-wrapper {
+    margin-top: 60px;
+}
+
 #grid-repos-wrapper {
     flex-grow: 1;
+    margin-top: 100px;
 }
 
 #footer-wrapper {

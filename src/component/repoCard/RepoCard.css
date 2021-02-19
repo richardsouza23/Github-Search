@@ -42,11 +42,8 @@
     font-size: 12px;
 }
 
-.repo-card .extra-repo-info-wrapper > div{
-    float: left;
-}
-
 .repo-card .extra-repo-info-wrapper .extra-info {
+    float: left;
     margin-right: 10px;
 }
 

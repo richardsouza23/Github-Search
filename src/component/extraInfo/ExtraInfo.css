@@ -1,5 +1,4 @@
 .extra-info {
-    display: inline-block;
     height: inherit;
 }
 
@@ -10,7 +9,6 @@
 }
 
 .extra-info span {
-    display: inline-block;
     font-size: 100%;
     line-height: 100%;
     height: 100%;
