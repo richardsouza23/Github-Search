@@ -72,5 +72,6 @@ const buildResultProps = (obj) => {
         },
         repoCount: obj.public_repos,
         reposUrl: obj.repos_url,
+        urlUser: obj.html_url
     };
 }
