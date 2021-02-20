@@ -7,10 +7,11 @@ import star_icon from "../../../assets/icons/star-solid.svg";
 import ExtraInfo from "../../extraInfo/ExtraInfo";
 import {getJson} from "../../../utils/apiUtils";
 
+
 export default class UserDetails extends Component {
 
     state = {
-        starsCount: 0,
+        starsCount: null,
         starsFetched: false
     }
 

@@ -10,7 +10,7 @@ export default class ResultPage extends Component {
 
 
     render() {
-        const { userAvatarUrl, userDetails, repoCount, reposUrl } = this.props;
+        const { userAvatarUrl, userDetails, repoCount, reposUrl, urlUser } = this.props;
 
         return (
             <div id={"content"} >
@@ -28,7 +28,7 @@ export default class ResultPage extends Component {
                 </div>
 
                 <div id={"footer-wrapper"}>
-                    <Footer />
+                    <Footer gitHubUrl={urlUser}  />
                 </div>
 
             </div>
