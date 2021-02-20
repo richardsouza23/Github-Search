@@ -5,26 +5,46 @@ import company_icon from "../../../assets/icons/briefcase-solid.svg";
 import users_icon from "../../../assets/icons/users-solid.svg";
 import star_icon from "../../../assets/icons/star-solid.svg";
 import ExtraInfo from "../../extraInfo/ExtraInfo";
+import {getJson} from "../../../utils/apiUtils";
 
 export default class UserDetails extends Component {
+
+    state = {
+        starsCount: 0,
+        starsFetched: false
+    }
+
     render() {
+        const { userName, login, location, company, followers, following} = this.props;
+
         return (
             <div className="user-details" >
                 <div className="user-name" >
-                    <h2>Gustavo Guanabara</h2>
-                    <h4>@gustavoguanabara</h4>
+                    <h2>{userName}</h2>
+                    <h4>{login ? `@${login}` : ""}</h4>
                 </div>
 
                 <div className="user-extra-info" >
 
-                    <ExtraInfo icon={map_icon} text={"São Paulo - Brazil"}/>
-                    <ExtraInfo icon={company_icon} text={"@juntossomosmais, @frontendb"}/>
-                    <ExtraInfo icon={users_icon} text={4700}/>
-                    <ExtraInfo icon={users_icon} text={233}/>
-                    <ExtraInfo icon={star_icon} text={30}/>
+                    <ExtraInfo icon={map_icon} text={location}/>
+                    <ExtraInfo icon={company_icon} text={company ? company.trim() : ""}/>
+                    <ExtraInfo icon={users_icon} text={followers}/>
+                    <ExtraInfo icon={users_icon} text={following}/>
+                    <ExtraInfo icon={star_icon} text={this.state.starsCount}/>
 
                 </div>
             </div>
         );
+    }
+
+    componentDidUpdate() {
+        let { starredUrl } = this.props;
+
+        //FIXME: Remove this verification and starsFetched
+        if(!this.state.starsFetched) {
+            getJson(starredUrl)
+                .then(list => this.setState({starsCount: list.length, starsFetched: true}))
+                .catch(err => console.log(err));
+        }
     }
 }

@@ -8,7 +8,10 @@ import "./ResultPage.css";
 
 export default class ResultPage extends Component {
 
+
     render() {
+        const { userAvatarUrl, userDetails, repoCount, reposUrl } = this.props;
+
         return (
             <div id={"content"} >
 
@@ -17,11 +20,11 @@ export default class ResultPage extends Component {
                 </div>
 
                 <div id={"user-info-wrapper"} className={"page-content-container"}>
-                    <UserInfo />
+                    <UserInfo userAvatarUrl={userAvatarUrl} userDetails={userDetails} repoCount={repoCount} />
                 </div>
 
                 <div id={"grid-repos-wrapper"} >
-                    <ReposGrid />
+                    <ReposGrid reposUrl={reposUrl} />
                 </div>
 
                 <div id={"footer-wrapper"}>

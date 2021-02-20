@@ -6,19 +6,21 @@ import "./UserInfo.css";
 
 export default class UserInfo extends Component {
     render() {
+        const { userAvatarUrl, userDetails, repoCount } = this.props;
+
         return (
             <div className={"user-info"} >
 
                 <div className={"user-photo-container"} >
-                    <img src="https://avatars.githubusercontent.com/u/8683378?v=4" />
+                    <img src={userAvatarUrl} />
                 </div>
 
                 <div className={"user-details-container"} >
-                    <UserDetails />
+                    <UserDetails {...userDetails} />
                 </div>
 
                 <div className={"repo-count-container"} >
-                    <RepoCount count={20} />
+                    <RepoCount count={repoCount} />
                 </div>
 
             </div>
