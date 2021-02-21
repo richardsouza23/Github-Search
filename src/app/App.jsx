@@ -7,71 +7,93 @@ import React, { Component } from "react";
 
 export default class App extends Component {
 
-    state = {
-        userData: {}
-    }
+    githubBaseUrl = process.env.REACT_APP_GITHUB_API_URL || "https://api.github.com";
+    
+    state = { userData: null }
 
     render() {
-    
+        let { userData } = this.state;
+
+        let page = userData ?
+            <ResultPage {...userData} backAction={this.wipeUserData} /> :
+            <SearchPage searchUser={this.getUser} /> ;
+
         return (
             <div className="App">
-                <ResultPage {...this.state.userData} />
+                {page}
             </div>
         );
     }
 
 
-    async componentDidMount() {
+    getUser = async (name) => {
 
-        let resultProps = await getUserData();
+        if(name && name !== ""){
 
-        if(resultProps) {
-            this.setState({userData: resultProps});
+            name = name.replaceAll(/\s+/g, "");
+            console.log(`Searching for user ${name}`);
+
+            let userData = await this.getUserData(name);
+
+            if(userData){
+                this.setState({userData: userData});
+            }
+
+        } else {
+            console.log("Invalid user name");
         }
     }
 
-}
 
+    getUserData = async (usernamme) => {
 
+        let urlUser = `${this.githubBaseUrl}/users/${usernamme}`;
 
-const getUserData = async () => {
+        try{
+            let responseObj = await getJson(urlUser);
 
-    let urlUser = "https://api.github.com/users/vitorsemidio-dev";
+            if(responseObj.message) {
+                console.log(responseObj.message);
+                return null;
+            }
 
-    try{
-        let responseObj = await getJson(urlUser);
-        return buildResultProps(responseObj);
-
-    } catch (err) {
-        console.log(err);
-        return null;
-    }
-}
-
-
-const buildResultProps = (obj) => {
-    let { starred_url } = obj, urlCropped = "";
-
-    try {
-        urlCropped = starred_url.substring(0, starred_url.indexOf("{"));
-
-    } catch (err) {
-        console.log(err);
+            return this.buildResultProps(responseObj);
+    
+        } catch (err) {
+            console.log("Error getting user data", err);
+            return null;
+        }
     }
 
-    return {
-        userAvatarUrl: obj.avatar_url,
-        userDetails: {
-            userName: obj.name, 
-            login: obj.login, 
-            location: obj.location, 
-            company: obj.company, 
-            followers: obj.followers, 
-            following: obj.following,
-            starredUrl: urlCropped
-        },
-        repoCount: obj.public_repos,
-        reposUrl: obj.repos_url,
-        urlUser: obj.html_url
-    };
+
+    buildResultProps = (obj) => {
+        let { starred_url } = obj, urlCropped = "";
+    
+        try {
+            urlCropped = starred_url.substring(0, starred_url.indexOf("{"));
+    
+        } catch (err) {
+            console.log(err);
+        }
+    
+        return {
+            userAvatarUrl: obj.avatar_url,
+            userDetails: {
+                userName: obj.name, 
+                login: obj.login, 
+                location: obj.location, 
+                company: obj.company, 
+                followers: obj.followers, 
+                following: obj.following,
+                starredUrl: urlCropped
+            },
+            repoCount: obj.public_repos,
+            reposUrl: obj.repos_url,
+            urlUser: obj.html_url
+        };
+    }
+
+    wipeUserData = () => {
+        this.setState({userData: null});
+    }
 }

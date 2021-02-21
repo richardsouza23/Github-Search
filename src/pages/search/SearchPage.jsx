@@ -7,7 +7,7 @@ export default class SearchPage extends Component {
     render() {
         return (
             <div id={"login-box-wrapper"}>
-                <SearchForm/>
+                <SearchForm searchUser={this.props.searchUser} />
             </div>
         );
     }

@@ -33,7 +33,7 @@ export default class ReposGrid extends Component {
         );
     }
 
-    async componentDidUpdate() {
+    async componentDidMount() {
 
         //FIXME: Remove this verification and reposFetched
         if(!this.state.reposFetched){

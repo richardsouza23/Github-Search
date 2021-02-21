@@ -5,11 +5,14 @@ import "./HeaderResult.css"
 
 export default function HeaderResult(props) {
 
+    let { handleClick } = props;
+
     return (
+
         <div className={"header-result"}>
             <div className={"page-content-container header-container"}>
-                <a><img className={"logo"} src={logo_horizontal} /></a>
-                <a><img className={"back-button"} src={left_arrow} /></a>
+                <img onClick={handleClick} className={"logo"} src={logo_horizontal} />
+                <img onClick={handleClick} className={"back-button"} src={left_arrow} />
             </div>
         </div>
     );

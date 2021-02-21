@@ -38,7 +38,7 @@ export default class UserDetails extends Component {
         );
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         let { starredUrl } = this.props;
 
         //FIXME: Remove this verification and starsFetched

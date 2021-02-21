@@ -10,13 +10,13 @@ export default class ResultPage extends Component {
 
 
     render() {
-        const { userAvatarUrl, userDetails, repoCount, reposUrl, urlUser } = this.props;
+        const { userAvatarUrl, userDetails, repoCount, reposUrl, urlUser, backAction } = this.props;
 
         return (
             <div id={"content"} >
 
                 <div id={"header-result-wrapper"}>
-                    <HeaderResult />
+                    <HeaderResult handleClick={backAction} />
                 </div>
 
                 <div id={"user-info-wrapper"} className={"page-content-container"}>
