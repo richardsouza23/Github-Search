@@ -9,10 +9,10 @@ export default function HeaderResult(props) {
 
     return (
 
-        <div className={"header-result"}>
-            <div className={"page-content-container header-container"}>
-                <img onClick={handleClick} className={"logo"} src={logo_horizontal} />
-                <img onClick={handleClick} className={"back-button"} src={left_arrow} />
+        <div className="header-result" >
+            <div className="page-content-container header-container" >
+                <img onClick={handleClick} className="logo clickable" src={logo_horizontal} />
+                <img onClick={handleClick} className="back-button" src={left_arrow} />
             </div>
         </div>
     );

@@ -21,7 +21,7 @@ export default class SearchForm extends Component {
                     <Input placeholder="Enter user name" />
                 </div>
 
-                <div className="button-wrapper" >
+                <div className="button-wrapper clickable" >
                     <Button label="Search" handleClick={this.handleClick} />
                 </div>
 

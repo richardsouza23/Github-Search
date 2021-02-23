@@ -4,8 +4,7 @@ import ExtraInfo from "../extraInfo/ExtraInfo"
 import starIcon from "../../assets/icons/star-solid.svg"
 import branchIcon from "../../assets/icons/code-branch-solid.svg"
 import fileCodeIcon from "../../assets/icons/file-code-solid.svg"
-import externalLinkIcon from "../../assets/icons/external-link-alt-solid.svg"
-
+import { openUrlNewTab } from "../../utils/utils";
 
 export default class RepoCard extends Component {
 
@@ -20,19 +19,18 @@ export default class RepoCard extends Component {
         } = this.props;
 
         return (
-            <div className={"repo-card"} >
+            <div className="repo-card" onClick={() => openUrlNewTab(htmlUrl)} >
 
-                <h4 className={"repo-name"} >{repoName}</h4>
+                <h4 className="repo-name" >{repoName}</h4>
 
-                <div className={"repo-description-wrapper"} >
+                <div className="repo-description-wrapper" >
                     <p>{repoDescription}</p>
                 </div>
 
-                <div className={"extra-repo-info-wrapper"}>
+                <div className="extra-repo-info-wrapper" >
                     <ExtraInfo icon={starIcon} text={stargazersCount} />
                     <ExtraInfo icon={branchIcon} text={forksCount} />
                     <ExtraInfo icon={fileCodeIcon} text={language} />
-                    <ExtraInfo icon={externalLinkIcon} isLink={true} link={htmlUrl} />
                 </div>
 
             </div>

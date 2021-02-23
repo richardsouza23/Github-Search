@@ -15,11 +15,21 @@
     display: inline-block;
     min-width: 5px;
 }
+
+
+/* FIXME: Use the "clickable" class instead of replicate its styles */ 
 .footer img {
     position: relative;
     height: 65%;
     top: 50%;
     transform: translateY(-50%);
     margin: 0 10px;
+    transition: .2s;
     cursor: pointer;
+}
+.footer img:hover {
+    transform: scale(1.08) translateY(-46%);
+}
+.footer img:active {
+    transform: scale(1.05) translateY(-47.5%);
 }

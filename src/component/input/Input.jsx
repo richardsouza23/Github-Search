@@ -1,13 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import "./Input.css";
 
-export default class Input extends Component {
-
-    render() {
-        return (
-            <div className={"input-box"}>
-                <input type={"text"} placeholder={this.props.placeholder} />
-            </div>
-       );
-    }
+export default function Input(props) {
+    return (
+        <div className="input-box" >
+            <input type="text" placeholder={props.placeholder} />
+        </div>
+    );
 }

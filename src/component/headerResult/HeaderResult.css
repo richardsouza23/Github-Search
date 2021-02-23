@@ -10,9 +10,10 @@
 
 .header-result .logo {
     height: 100%;
-    cursor: pointer;
 }
 
+
+/* FIXME: Use the "clickable" class instead of replicate its styles */ 
 .header-result .back-button {
     height: 50%;
     position: relative;
@@ -20,4 +21,10 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+}
+.header-result .back-button:hover {
+    transform: scale(1.08) translateY(-46%);
+}
+.header-result .back-button:active {
+    transform: scale(1.05) translateY(-47.5%);
 }

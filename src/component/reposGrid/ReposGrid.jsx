@@ -20,14 +20,14 @@ export default class ReposGrid extends Component {
             let repo = repos[i];
 
             reposComponents.push(
-                <div className={"repo-card-wrapper"} key={i} >
+                <div className="repo-card-wrapper clickable" key={i} >
                     <RepoCard {...repo} />
                 </div>
             );
         }
 
         return (
-            <div className={"page-content-container grid-repos"}>
+            <div className="page-content-container grid-repos" >
                 {reposComponents}
             </div>
         );

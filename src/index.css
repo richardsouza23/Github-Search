@@ -11,6 +11,18 @@ body {
     margin: auto;
 }
 
+
+.clickable{
+    transition: transform .2s;
+    cursor: pointer;
+}
+.clickable:hover {
+    transform: scale(1.08);
+}
+.clickable:active {
+    transform: scale(1.05);
+}
+
 @media(Max-width: 760px) {
     .page-content-container{
         width: 94%;
