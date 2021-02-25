@@ -1,7 +1,7 @@
 import SearchPage from "../pages/search/SearchPage";
 import ResultPage from "../pages/result/ResultPage";
 import "./App.css"
-import { getJson } from "../utils/apiUtils";
+import { getResponse, STATUS_OK } from "../utils/apiUtils";
 import React, { Component } from "react";
 
 
@@ -50,14 +50,14 @@ export default class App extends Component {
         let urlUser = `${this.githubBaseUrl}/users/${usernamme}`;
 
         try{
-            let responseObj = await getJson(urlUser);
+            let { status, body} = await getResponse(urlUser);
 
-            if(responseObj.message) {
-                console.log(responseObj.message);
+            if(status !== STATUS_OK) {
+                console.log(body);
                 return null;
             }
 
-            return this.buildResultProps(responseObj);
+            return this.buildResultProps(body);
     
         } catch (err) {
             console.log("Error getting user data", err);

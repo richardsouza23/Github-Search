@@ -19,6 +19,7 @@
     position: relative;
     float: right;
     top: 50%;
+    transition: .2s;
     transform: translateY(-50%);
     cursor: pointer;
 }

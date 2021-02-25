@@ -5,7 +5,7 @@ import company_icon from "../../../assets/icons/briefcase-solid.svg";
 import users_icon from "../../../assets/icons/users-solid.svg";
 import star_icon from "../../../assets/icons/star-solid.svg";
 import ExtraInfo from "../../extraInfo/ExtraInfo";
-import {getJson} from "../../../utils/apiUtils";
+import { getResponse, STATUS_OK } from "../../../utils/apiUtils";
 
 
 export default class UserDetails extends Component {
@@ -38,14 +38,30 @@ export default class UserDetails extends Component {
         );
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let { starredUrl } = this.props;
 
-        //FIXME: Remove this verification and starsFetched
-        if(!this.state.starsFetched) {
-            getJson(starredUrl)
-                .then(list => this.setState({starsCount: list.length, starsFetched: true}))
-                .catch(err => console.log(err));
+        try{
+            let { status, headers } = await getResponse(`${starredUrl}?per_page=1`);
+
+            if(status === STATUS_OK) {
+                let starredCount = this.extractPageCountFromHeaders(headers);
+                this.setState({starsCount: starredCount})
+            }
+
+        } catch (err) {
+            console.log(err);
         }
+    }
+
+
+    extractPageCountFromHeaders = (headers) => {
+
+        let linkHeader = headers.get('link');
+        if(!linkHeader) {
+            return null;
+        }
+
+        return linkHeader.match(/&page=(\d+)>; rel="last"/)[1];
     }
 }

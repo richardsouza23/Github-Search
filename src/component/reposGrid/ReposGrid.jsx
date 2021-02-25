@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import RepoCard from "../repoCard/RepoCard";
 import "./ReposGrid.css";
-import {getJson} from "../../utils/apiUtils";
+import { getResponse, STATUS_OK } from "../../utils/apiUtils";
 
 const MAX_REPO_PAGES = process.env.REACT_APP_MAX_REPO_PAGES_QTY || 30;
 
 export default class ReposGrid extends Component {
 
     state = {
-        repos: [],
-        reposFetched: false
+        repos: []
     }
 
     render() {
@@ -35,31 +34,33 @@ export default class ReposGrid extends Component {
 
     async componentDidMount() {
 
-        //FIXME: Remove this verification and reposFetched
-        if(!this.state.reposFetched){
+        let allRepos = [];
 
-            let allRepos = [];
+        try{
+            let page = 1;
 
-            try{
-                let page = 1;
-
-                while(page <= MAX_REPO_PAGES) {
-                    let reposFullResponsePage = await getJson(`${this.props.reposUrl}?page=${page++}`);
-                    let reposPage = await reposFullResponsePage.map(repoAPI => this.extractRepoInfo(repoAPI));
-
-                    if(reposPage.length === 0){
-                        break;
-                    }
-
-                    allRepos = [...allRepos, ...reposPage];
+            while(page <= MAX_REPO_PAGES) {
+                let { status, body } = await getResponse(`${this.props.reposUrl}?page=${page++}`);
+                    
+                if(status !== STATUS_OK){
+                    console.log(body);
+                    break;
                 }
 
-            } catch (err) {
-                console.log(err);
+                let reposPage = body.map(repoAPI => this.extractRepoInfo(repoAPI));
+
+                if(reposPage.length === 0){
+                    break;
+                }
+
+                allRepos = [...allRepos, ...reposPage];
             }
-            
-            this.setState({repos: allRepos, reposFetched: true});
+
+        } catch (err) {
+            console.log(err);
         }
+            
+        this.setState({repos: allRepos});
     }
 
     extractRepoInfo(repoAPI) {
