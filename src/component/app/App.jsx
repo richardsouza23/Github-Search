@@ -1,7 +1,7 @@
 import SearchPage from "../pages/search/SearchPage";
 import ResultPage from "../pages/result/ResultPage";
 import "./App.css"
-import { getResponse, STATUS_OK } from "../utils/apiUtils";
+import { getResponse, STATUS_OK } from "../../utils/apiUtils";
 import React, { Component } from "react";
 
 

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Footer from "../../component/footer/Footer";
-import HeaderResult from "../../component/headerResult/HeaderResult";
-import ReposGrid from "../../component/reposGrid/ReposGrid";
-import UserInfo from "../../component/userInfo/UserInfo";
+import Footer from "../../footer/Footer";
+import HeaderResult from "../../headerResult/HeaderResult";
+import ReposGrid from "../../reposGrid/ReposGrid";
+import UserInfo from "../../userInfo/UserInfo";
 import "./ResultPage.css";
 
 

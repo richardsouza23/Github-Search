@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchForm from "../../component/searchForm/SearchForm";
+import SearchForm from "../../searchForm/SearchForm";
 import "./SearchPage.css"
 
 export default class SearchPage extends Component {
