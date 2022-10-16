@@ -3,11 +3,11 @@ import SearchForm from "../../searchForm/SearchForm";
 import "./SearchPage.css"
 
 
-export default function SearchPage({searchUser}) {
+export default function SearchPage() {
 
     return (
         <div id="login-box-wrapper">
-            <SearchForm searchUser={searchUser} />
+            <SearchForm />
         </div>
     );
 }
