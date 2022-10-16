@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { backToSearchAction } from "../../../state/actions";
+import { getUserGithubPageUrl } from "../../../state/selectors";
 import Footer from "../../footer/Footer";
 import HeaderResult from "../../headerResult/HeaderResult";
 import ReposGrid from "../../reposGrid/ReposGrid";
@@ -9,18 +10,17 @@ import "./ResultPage.css";
 
 
 const enhance = connect(
-    null,
+    (state) => ({
+        userGithubPageUrl: getUserGithubPageUrl(state)
+    }),
     (dispatch) => ({
         backToSearch: () => dispatch(backToSearchAction())
     })
 )
 
 const ResultPage = ({
-    userAvatarUrl, 
-    userDetails, 
-    repoCount, 
     reposUrl, 
-    urlUser, 
+    userGithubPageUrl, 
     backToSearch 
 }) => {
 
@@ -32,7 +32,7 @@ const ResultPage = ({
             </div>
 
             <div id="user-info-wrapper" className="page-content-container">
-                <UserInfo userAvatarUrl={userAvatarUrl} userDetails={userDetails} repoCount={repoCount} />
+                <UserInfo />
             </div>
 
             <div id="grid-repos-wrapper">
@@ -40,7 +40,7 @@ const ResultPage = ({
             </div>
 
             <div id="footer-wrapper">
-                <Footer gitHubUrl={urlUser}  />
+                <Footer gitHubUrl={userGithubPageUrl}  />
             </div>
 
         </div>

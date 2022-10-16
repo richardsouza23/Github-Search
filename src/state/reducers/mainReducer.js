@@ -1,4 +1,4 @@
-import { RESULT_VIEW, SEARCH_VIEW } from "../../utils/constants";
+import { SEARCH_VIEW } from "../../utils/constants";
 import { BACK_TO_SEARCH, SET_CURRENT_USER, SET_VIEW_RESULT } from "../actions";
 
 const initialState = {
