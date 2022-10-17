@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { getCurrentUser } from "../../state/selectors";
 import RepoCount from "./repoCount/RepoCount";
