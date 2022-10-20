@@ -1,85 +1,50 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import { connect } from "react-redux";
 import RepoCard from "../repoCard/RepoCard";
 import "./ReposGrid.css";
-import { getResponse, STATUS_OK } from "../../utils/apiUtils";
+import { getRepoList } from "../../state/selectors";
+import { fetchUserReposAction } from "../../state/actions";
+import { identity, map } from "ramda";
 
-const MAX_REPO_PAGES = process.env.REACT_APP_MAX_REPO_PAGES_QTY || 30;
 
-export default class ReposGrid extends Component {
+const enhance = connect(
+    (state) => ({
+        repoList: getRepoList(state)
+    }),
+    (dispatch) => ({
+        fetchRepos: () => dispatch(fetchUserReposAction())
+    })
+);
 
-    state = {
-        repos: []
-    }
 
-    render() {
-        let {repos} = this.state;
+const ReposGrid = ({repoList, fetchRepos = identity}) => {
 
-        let reposComponents = [];
-        for(let i=0 ; i < repos.length; i++) {
-            let repo = repos[i];
+    useEffect(() => {
+        if(!repoList){
+            fetchRepos();
+        }
 
-            reposComponents.push(
-                <div className="repo-card-wrapper clickable" key={i} >
+    }, [repoList])
+
+    const reposComponents = !repoList ? 
+        null : 
+        map(
+            (repo) => ( 
+                <div className="repo-card-wrapper clickable" key={repo.id} >
                     <RepoCard {...repo} />
                 </div>
-            );
-        }
-
-        return (
-            <div className="page-content-container grid-repos" >
-                {reposComponents}
-            </div>
+            ),
+            repoList
         );
-    }
 
-    async componentDidMount() {
-
-        let allRepos = [];
-
-        try{
-            let page = 1;
-
-            while(page <= MAX_REPO_PAGES) {
-                let { status, body } = await getResponse(`${this.props.reposUrl}?page=${page++}`);
-                    
-                if(status !== STATUS_OK){
-                    console.log(body);
-                    break;
-                }
-
-                let reposPage = body.map(repoAPI => this.extractRepoInfo(repoAPI));
-
-                if(reposPage.length === 0){
-                    break;
-                }
-
-                allRepos = [...allRepos, ...reposPage];
-            }
-
-        } catch (err) {
-            console.log(err);
-        }
-            
-        this.setState({repos: allRepos});
-    }
-
-    extractRepoInfo(repoAPI) {
-        let { 
-            name, 
-            description, 
-            stargazers_count, 
-            forks_count, 
-            language, 
-            html_url 
-        } = repoAPI;
-
-        return {
-            repoName: name,
-            repoDescription: description,
-            stargazersCount: stargazers_count,
-            forksCount: forks_count,
-            language: language,
-            htmlUrl: html_url
-        };
-    }
+    return (
+        <div className="page-content-container grid-repos" >
+            {reposComponents}
+        </div>
+    );
+    
 }
+ 
+
+
+export default enhance(ReposGrid);

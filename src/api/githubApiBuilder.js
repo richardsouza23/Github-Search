@@ -1,14 +1,16 @@
 import axios from "axios";
-import { pickAll, pipe, prop } from "ramda";
+import { concat, map, pickAll, pipe, prop, range, reduce } from "ramda";
 
 
-export const githubApiBuilder = (baseUrl, token, maxRepoPages) => {
+export const githubApiBuilder = (baseUrl, token) => {
 
     const axiosInstance = axios.create({
         baseURL: baseUrl
     });
 
     axiosInstance.defaults.headers.common['Authorization'] = token;
+
+    const reposPerPage = 100;
 
     return {
         getUserByUsername: (username) => {
@@ -33,6 +35,38 @@ export const githubApiBuilder = (baseUrl, token, maxRepoPages) => {
                     Promise.resolve(null) :
                     Promise.reject(message || response);
             })
+        },
+
+        getUserRepos: (username, maxQty = 50) => {
+
+            const pageQty = Math.ceil(maxQty / reposPerPage);
+
+            const repoProps = [
+                'id',
+                'name',
+                'description',
+                'stargazers_count',
+                'forks_count',
+                'language',
+                'html_url'
+            ];
+
+            const fetchPage = (page) => 
+                axiosInstance.get(
+                    `/users/${username}/repos?per_page=${reposPerPage}&page=${page}`
+                ).then(pipe(
+                    prop('data'),
+                    map(pickAll(repoProps))
+                )).catch((err) => {throw new Error(err);});
+
+            const getReposInPage = (promise, page) => 
+                promise.then((repoList) => fetchPage(page).then(concat(repoList)));
+
+            return reduce(
+                getReposInPage,
+                Promise.resolve([]),
+                range(1, pageQty + 1)
+            );
         }
     };
 }

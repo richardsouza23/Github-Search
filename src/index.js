@@ -15,9 +15,8 @@ import { Provider } from 'react-redux';
 
 const githubApiBaseUrl = process.env.REACT_APP_GITHUB_API_URL || "";
 const githubApiToken = process.env.REACT_APP_GITHUB_API_TOKEN || "";
-const githubApiMaxRepoPages = process.env.REACT_APP_MAX_REPO_PAGES_QTY || "";
 
-const githubApi = githubApiBuilder(githubApiBaseUrl, githubApiToken, githubApiMaxRepoPages);
+const githubApi = githubApiBuilder(githubApiBaseUrl, githubApiToken);
 
 const sagaMiddleware = createSagaMiddleware();
 

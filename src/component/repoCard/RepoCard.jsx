@@ -9,26 +9,26 @@ import { openUrlNewTab } from "../../utils/utils";
 
 
 const RepoCard = ({ 
-    repoName, 
-    repoDescription, 
-    stargazersCount, 
-    forksCount, 
+    name, 
+    description, 
+    stargazers_count, 
+    forks_count, 
     language, 
-    htmlUrl 
+    html_url 
 }) => {
 
     return (
-        <div className="repo-card" onClick={() => openUrlNewTab(htmlUrl)} >
+        <div className="repo-card" onClick={() => openUrlNewTab(html_url)} >
 
-            <h4 className="repo-name" >{repoName}</h4>
+            <h4 className="repo-name" >{name}</h4>
 
             <div className="repo-description-wrapper" >
-                <p>{repoDescription}</p>
+                <p>{description}</p>
             </div>
 
             <div className="extra-repo-info-wrapper" >
-                <ExtraInfo icon={starIcon} text={stargazersCount} />
-                <ExtraInfo icon={branchIcon} text={forksCount} />
+                <ExtraInfo icon={starIcon} text={stargazers_count} />
+                <ExtraInfo icon={branchIcon} text={forks_count} />
                 <ExtraInfo icon={fileCodeIcon} text={language} />
             </div>
 

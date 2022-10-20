@@ -19,7 +19,6 @@ const enhance = connect(
 )
 
 const ResultPage = ({
-    reposUrl, 
     userGithubPageUrl, 
     backToSearch 
 }) => {
@@ -36,7 +35,7 @@ const ResultPage = ({
             </div>
 
             <div id="grid-repos-wrapper">
-                <ReposGrid reposUrl={reposUrl} />
+                <ReposGrid />
             </div>
 
             <div id="footer-wrapper">
