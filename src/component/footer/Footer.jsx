@@ -4,10 +4,8 @@ import gitHubBrand from "../../assets/icons/github-brands.svg"
 import linkedinBrand from "../../assets/icons/linkedin-brands.svg"
 import { openUrlNewTab } from "../../utils/utils";
 
-export default function Footer(props) {
+export default function Footer({gitHubUrl, linkedinUrl}) {
     
-    let { gitHubUrl, linkedinUrl } = props;
-
     return (
         <div className="footer" >
             <div className="page-content-container footer-content" >

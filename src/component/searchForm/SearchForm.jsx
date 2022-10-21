@@ -1,42 +1,36 @@
-import React, { Component } from "react";
-import logo from "../../assets/logo-vertical.svg"
+import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import Input from "../input/Input";
-import Button from "../button/Button"
-import "./SearchForm.css"
+import Button from "../button/Button";
+
+import "./SearchForm.css";
+import logo from "../../assets/logo-vertical.svg";
+import { searchRequestAction } from "../../state/actions";
 
 
-export default class SearchForm extends Component {
+const enhance = connect(
+    null,
+    (dispatch) => ({
+        requestSearch: (text) => dispatch(searchRequestAction(text))
+    })
+);
 
-    state = {
-        inputPlaceHolder: "Enter user name"
-    }
-    
-    render() {
-        return (
-            <div id="search-box" >
+const SearchForm = ({requestSearch}) => {
 
-                <img src={logo}/>
+    const [text, setText] = useState('');
 
-                <div className="input-box-wrapper" >
-                    <Input placeholder="Enter user name" />
-                </div>
-
-                <div className="button-wrapper clickable" >
-                    <Button label="Search" handleClick={this.handleClick} />
-                </div>
-
+    return (
+        <div id="search-box" >
+            <img src={logo}/>
+            <div className="input-box-wrapper" >
+                <Input placeholder="Enter user name" onChange={setText} />
             </div>
-        );
-    }
-
-
-    handleClick = () => {
-        
-        let inputUserName = document.querySelector(".input-box input");
-        let {searchUser} = this.props;
-
-        if(inputUserName && searchUser){
-            this.props.searchUser(inputUserName.value.trim())
-        }
-    }
+            <div className="button-wrapper clickable" >
+                <Button label="Search" onClick={() => requestSearch(text)} />
+            </div>
+        </div>
+    );
 }
+
+export default enhance(SearchForm);
