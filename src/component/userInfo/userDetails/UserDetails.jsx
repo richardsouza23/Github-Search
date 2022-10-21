@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getTotalReposStars } from "../../../state/selectors";
+
 import "./UserDetails.css";
 import map_icon from "../../../assets/icons/map-marker-alt-solid.svg";
 import company_icon from "../../../assets/icons/briefcase-solid.svg";
@@ -7,10 +10,16 @@ import star_icon from "../../../assets/icons/star-solid.svg";
 import ExtraInfo from "../../extraInfo/ExtraInfo";
 
 
+const enhance = connect(
+    (state) => ({
+        starsCount: getTotalReposStars(state)
+    })
+);
 
-const UserDetails = ({currentUser}) => {
 
-    const { name, login, location, company, followers, following, stars_count } = currentUser;
+const UserDetails = ({currentUser, starsCount}) => {
+
+    const { name, login, location, company, followers, following } = currentUser;
 
     return (
         <div className="user-details" >
@@ -24,10 +33,10 @@ const UserDetails = ({currentUser}) => {
                 <ExtraInfo icon={company_icon} text={company ? company.trim() : ""}/>
                 <ExtraInfo icon={users_icon} text={followers}/>
                 <ExtraInfo icon={users_icon} text={following}/>
-                <ExtraInfo icon={star_icon} text={stars_count}/>
+                <ExtraInfo icon={star_icon} text={starsCount}/>
             </div>
         </div>
     );
 }
 
-export default UserDetails;
+export default enhance(UserDetails);

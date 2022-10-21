@@ -1,4 +1,15 @@
-import { compose, lensPath, lensProp, prop, pipe, view } from "ramda";
+import { 
+    compose, 
+    lensPath, 
+    lensProp, 
+    prop, 
+    pipe, 
+    view, 
+    map, 
+    ifElse, 
+    isNil, 
+    sum 
+} from "ramda";
 
 const currentUserLens = lensPath(["mainReducer", "currentUser"]);
 const currentViewLens = lensPath(["mainReducer", "view"]);
@@ -16,3 +27,14 @@ export const getCurrentView = (state) => view(currentViewLens, state);
 export const getUserGithubPageUrl = (state) => view(userGithubPageUrlLens, state);
 
 export const getRepoList = (state) => view(repoListLens, state);
+
+export const getTotalReposStars = (state) => 
+    pipe(
+        getRepoList,
+        ifElse(
+            isNil, 
+            ()=>[], 
+            map(prop('stargazers_count'))
+        ),
+        sum
+    )(state);
